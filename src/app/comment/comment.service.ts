@@ -18,4 +18,8 @@ export class CommentService {
   postComment(commentPayload: CommentPayload) {
     return this.httpClient.post(this.url, commentPayload);
   }
+
+  getCommentsByUsername(username: string): Observable<CommentPayload[]>  {
+    return this.httpClient.get<CommentPayload[]>(`${this.url}/by-user/${username}`);
+  }
 }

@@ -22,4 +22,12 @@ export class PostService {
   getPost(id: string): Observable<PostModel> {
     return this.http.get<PostModel>(this.url+`/${id}`);
   }
+
+  getPostsByUsername(username: string): Observable<PostModel[]> {
+    return this.http.get<PostModel[]>(`${this.url}/by-user/${username}`)
+  }
+
+  getPostsBySubreddit(subreddit: string): Observable<PostModel[]> {
+    return this.http.get<PostModel[]>(`${this.url}/by-subreddit/${subreddit}`)
+  }
 }
