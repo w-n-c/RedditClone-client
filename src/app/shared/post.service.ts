@@ -18,4 +18,8 @@ export class PostService {
   createPost(request: PostRequest) {
     return this.http.post<PostRequest>(this.url, request);
   }
+
+  getPost(id: string): Observable<PostModel> {
+    return this.http.get<PostModel>(this.url+`/${id}`);
+  }
 }
