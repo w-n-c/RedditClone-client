@@ -21,6 +21,7 @@ import { SideBarComponent } from './shared/side-bar/side-bar.component';
 import { SubredditSideBarComponent } from './shared/subreddit-side-bar/subreddit-side-bar.component';
 import { CreateSubredditComponent } from './subreddit/create-subreddit/create-subreddit.component';
 import { CreatePostComponent } from './post/create-post/create-post.component';
+import { ListSubredditsComponent } from './subreddit/list-subreddits/list-subreddits.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { CreatePostComponent } from './post/create-post/create-post.component';
     SideBarComponent,
     SubredditSideBarComponent,
     CreateSubredditComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    ListSubredditsComponent
   ],
   imports: [
     BrowserModule,
