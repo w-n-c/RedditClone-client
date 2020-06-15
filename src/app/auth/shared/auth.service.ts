@@ -60,4 +60,8 @@ export class AuthService {
   getExpirationTime(): string {
     return this.ls.retrieve('expiresAt')
   }
+
+  isLoggedIn(): boolean {
+    return this.getJwtToken() != null;
+  }
 }
