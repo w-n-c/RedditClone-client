@@ -8,7 +8,7 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { AuthService } from './auth/shared/auth.service';
-import { catchError, switchMap } from 'rxjs/operators';
+import { catchError, switchMap, filter, take } from 'rxjs/operators';
 import LoginResponse from './auth/login/response.payload';
 
 @Injectable({
@@ -20,15 +20,14 @@ export class TokenInterceptor implements HttpInterceptor {
   refreshTokenSubject: BehaviorSubject<unknown> = new BehaviorSubject(null);
   constructor(private authService: AuthService) { }
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const token: string = this.authService.getJwtToken();
-    if (token) {
-      this.addToken(request, token);
+  intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    if (req.url.indexOf('refresh') !== -1 || req.url.indexOf('login') !== -1) {
+      return next.handle(req);
     }
-
-    return next.handle(request).pipe(catchError(error => {
+    const jwtToken = this.authService.getJwtToken();
+    return next.handle(this.addToken(req, jwtToken)).pipe(catchError(error => {
       if (error instanceof HttpErrorResponse && error.status === 403) {
-        return this.handleAuthErrors(request, next);
+        return this.handleAuthErrors(req, next);
       } else {
         return throwError(error);
       }
@@ -44,6 +43,14 @@ export class TokenInterceptor implements HttpInterceptor {
           this.isTokenRefreshing = false;
           this.refreshTokenSubject.next(refreshRes.authenticationToken)
           return next.handle(this.addToken(req, refreshRes.authenticationToken))
+        })
+      )
+    } else {
+      return this.refreshTokenSubject.pipe(
+        filter(result => result !== null),
+        take(1),
+        switchMap((res) => {
+          return next.handle(this.addToken(req, this.authService.getJwtToken()));
         })
       )
     }
