@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { NgxWebstorageModule } from 'ngx-webstorage'
 import { ToastrModule } from 'ngx-toastr';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+import { EditorModule } from '@tinymce/tinymce-angular'
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -46,7 +47,8 @@ import { ListSubredditsComponent } from './subreddit/list-subreddits/list-subred
     ReactiveFormsModule,
     NgxWebstorageModule.forRoot(),
     ToastrModule.forRoot(),
-    FontAwesomeModule
+    FontAwesomeModule,
+    EditorModule
   ],
   providers: [
     {
