@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class SubredditService {
 
-  url = 'http://localhost:8080/api/subreddit'
+  url = 'http://localhost:8080/api/subreddits'
   constructor(private http: HttpClient) { }
   
   getAllSubreddits(): Observable<SubredditModel[]> {
