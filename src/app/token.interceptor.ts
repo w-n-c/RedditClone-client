@@ -11,7 +11,9 @@ import { AuthService } from './auth/shared/auth.service';
 import { catchError, switchMap } from 'rxjs/operators';
 import LoginResponse from './auth/login/response.payload';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class TokenInterceptor implements HttpInterceptor {
 
   isTokenRefreshing: boolean = false;
