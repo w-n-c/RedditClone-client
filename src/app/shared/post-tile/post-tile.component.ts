@@ -21,4 +21,8 @@ export class PostTileComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  goToPost(id) {
+
+  }
+
 }

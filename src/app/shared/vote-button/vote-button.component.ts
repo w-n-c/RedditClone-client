@@ -11,11 +11,21 @@ import { faArrowUp, faArrowDown, IconDefinition } from '@fortawesome/free-solid-
 export class VoteButtonComponent implements OnInit {
   faArrowUp:IconDefinition = faArrowUp;
   faArrowDown:IconDefinition = faArrowDown;
+  upvoteColor= ''
+  downvoteColor= ''
 
   @Input() post: PostModel;
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  downvotePost() {
+
+  }
+
+  upvotePost() {
+
   }
 
 }
