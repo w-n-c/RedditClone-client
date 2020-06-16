@@ -29,17 +29,6 @@ export class ViewPostComponent implements OnInit {
       text: '',
       postId: this.postId
     }
-    this.post = {
-      id: Number(this.postId),
-      postName: '',
-      url: '',
-      description: '',
-      voteCount: 0,
-      username: '',
-      subredditName: '',
-      commentCount: '',
-      duration: ''
-    }
   }
 
   ngOnInit(): void {
